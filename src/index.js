@@ -8,8 +8,6 @@ import store from "./redux/store";
 
 import App from "./App";
 
-import "./api/fetchCurrency";
-
 import "./css/basic.css";
 
 ReactDOM.render(

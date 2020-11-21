@@ -4,34 +4,26 @@ import { forexSelectors } from "../../redux/forex";
 import CurrencySelector from "./CurrencySelector";
 
 const CurrencySelectorContainer = ({
-  baseCurrency,
+  startCurrency,
   exchangeRates,
   handleCurrencyChange,
 }) => {
-  const ratesKeyes = Object.keys(exchangeRates);
+  const ratesKeyes = Object.keys(exchangeRates).sort();
 
   return (
-    <>
-      {ratesKeyes.length > 0 && (
-        <CurrencySelector
-          baseCurrency={baseCurrency}
-          ratesKeyes={ratesKeyes}
-          handleCurrencyChange={handleCurrencyChange}
-        />
-      )}
-    </>
+    <CurrencySelector
+      startCurrency={startCurrency}
+      ratesKeyes={ratesKeyes}
+      handleCurrencyChange={handleCurrencyChange}
+    />
   );
 };
 
-const MSTP = (state) => ({
-  baseCurrency: forexSelectors.getBaseCurrency(state),
+const MSTP = (state, ownProps) => ({
+  startCurrency: ownProps.startCurrency
+    ? ownProps.startCurrency
+    : forexSelectors.getBaseCurrency(state),
   exchangeRates: forexSelectors.getExchangeRates(state),
 });
 
 export default connect(MSTP)(CurrencySelectorContainer);
-
-// <CurrencySelector
-//         baseCurrency={baseCurrency}
-//         ratesKeyes={ratesKeyes}
-//         handleCurrencyChange={handleCurrencyChange}
-//       />

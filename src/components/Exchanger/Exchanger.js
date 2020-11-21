@@ -1,13 +1,42 @@
-import React, { useState } from "react";
-import CurrencyConverter from "react-currency-conv";
+import React from "react";
 
-const Exchanger = () => {
+import CurrencySelector from "../CurrencySelector";
+
+const Exchanger = ({
+  onBaseCurrencyChange,
+  onCounterCurrencyChange,
+  baseCurrency,
+  counterCurrency,
+  onBaseCurrencyValueChange,
+  onCounterCurrencyValueChange,
+  baseCurrencyValue,
+  counterCurrencyValue,
+  fetchCounterCurrency,
+}) => {
   return (
     <section className="exchanger">
       <form>
-        <select>usd</select>
-        <CurrencyConverter from={"USD"} to={"CAD"} value={29} />
-        <span>CAD</span>
+        <input
+          type="number"
+          value={baseCurrencyValue}
+          onChange={(e) => {
+            onBaseCurrencyValueChange(e.target.value);
+            fetchCounterCurrency(e.target.value);
+          }}
+        />
+        <CurrencySelector
+          handleCurrencyChange={onBaseCurrencyChange}
+          startCurrency={baseCurrency}
+        />
+        <input
+          type="number"
+          value={counterCurrencyValue}
+          onChange={(e) => onCounterCurrencyValueChange(e.target.value)}
+        />
+        <CurrencySelector
+          handleCurrencyChange={onCounterCurrencyChange}
+          startCurrency={counterCurrency}
+        />
       </form>
     </section>
   );

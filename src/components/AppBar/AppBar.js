@@ -10,10 +10,10 @@ import {
 
 import CurrencySelector from "../CurrencySelector";
 
-const AppBar = ({ fetchLatestCurrency, setBaseCurrency }) => {
+const AppBar = ({ fetchLatestCurrency, setBaseCurrency, baseCurrency }) => {
   useEffect(() => {
     fetchLatestCurrency();
-  }, [fetchLatestCurrency, setBaseCurrency]);
+  }, [fetchLatestCurrency]);
 
   return (
     <>
@@ -25,9 +25,13 @@ const AppBar = ({ fetchLatestCurrency, setBaseCurrency }) => {
   );
 };
 
+const MSTP = (state) => ({
+  baseCurrency: forexSelectors.getBaseCurrency(state),
+});
+
 const MDTP = {
   fetchLatestCurrency: forexOperations.fetchLatestCurrencies,
   setBaseCurrency: forexActions.setBaseCurrency,
 };
 
-export default connect(null, MDTP)(AppBar);
+export default connect(MSTP, MDTP)(AppBar);

@@ -1,12 +1,12 @@
 import React from "react";
 
 const CurrencySelector = ({
-  baseCurrency,
+  startCurrency,
   ratesKeyes,
   handleCurrencyChange,
 }) => (
   <select
-    value={baseCurrency}
+    value={startCurrency}
     onChange={(e) => handleCurrencyChange(e.target.value)}
   >
     {ratesKeyes.map((rate) => (
