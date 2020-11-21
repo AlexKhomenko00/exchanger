@@ -3,25 +3,34 @@ import { connect } from "react-redux";
 
 import { forexOperations, forexSelectors } from "../../redux/forex";
 
+import './MainPage.css'
+
 const MainPage = ({ fetchLatestCurrency, exchangeRates, baseCurrency }) => {
   useEffect(() => {
     fetchLatestCurrency(baseCurrency);
   }, [fetchLatestCurrency, baseCurrency]);
 
-  const ratesKeyes = Object.keys(exchangeRates);
+  const ratesKeyes = Object.keys(exchangeRates).sort();
 
   return (
     <>
-      <h1>Main Page</h1>
-      <ul>
-        {ratesKeyes.map((rate) => (
-          <li key={rate}>
-            <span>
-              {rate}:{exchangeRates[rate]}{" "}
-            </span>
-          </li>
-        ))}
-      </ul>
+      <table className="exchangeTable">
+        <caption> Обмен валют </caption>
+        <thead>
+          <tr>
+            <th>Конвертируемая валюта</th>
+            <th>Курс</th>
+          </tr>
+        </thead>
+        <tbody>
+          {ratesKeyes.map((rate) => <tr>
+            <td>{rate}</td>
+            <td>{exchangeRates[rate]}</td>
+          </tr>)
+          }
+       </tbody>
+     </table>
+      
     </>
   );
 };
