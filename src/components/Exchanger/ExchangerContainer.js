@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import { forexSelectors } from "../../redux/forex";
@@ -15,17 +15,25 @@ const ExchangerContainer = ({ baseCurrency }) => {
 
   const [counterCurrencyValue, setCounterCurrencyValue] = useState("");
 
-  const fetchCounterCurrency = async (baseCurrencyValue) => {
-    const exhangeValue = await fetchCurrenciesPair(
-      currentBaseCurrency,
-      counterCurrency
-    );
-    setCounterCurrencyValue(+baseCurrencyValue * +exhangeValue);
-  };
+  const memoizedFetchCounterCurrency = useCallback(
+    async (baseCurrencyValue) => {
+      const exhangeValue = await fetchCurrenciesPair(
+        currentBaseCurrency,
+        counterCurrency
+      );
+      setCounterCurrencyValue(+baseCurrencyValue * +exhangeValue);
+    },
+    [counterCurrency, currentBaseCurrency]
+  );
 
   useEffect(() => {
-    fetchCounterCurrency(baseCurrencyValue);
-  }, [currentBaseCurrency, counterCurrency, baseCurrencyValue]);
+    memoizedFetchCounterCurrency(baseCurrencyValue);
+  }, [
+    currentBaseCurrency,
+    counterCurrency,
+    baseCurrencyValue,
+    memoizedFetchCounterCurrency,
+  ]);
 
   return (
     <Exchanger
@@ -37,7 +45,7 @@ const ExchangerContainer = ({ baseCurrency }) => {
       onCounterCurrencyValueChange={setCounterCurrencyValue}
       baseCurrencyValue={baseCurrencyValue}
       counterCurrencyValue={counterCurrencyValue}
-      fetchCounterCurrency={fetchCounterCurrency}
+      fetchCounterCurrency={memoizedFetchCounterCurrency}
     />
   );
 };
