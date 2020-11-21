@@ -1,4 +1,4 @@
-import { createSelector } from "@reduxjs/toolkit";
+/* eslint-disable import/no-anonymous-default-export */
 
 const getExchangeRates = ({ forex }) => forex.exchangeRates;
 
