@@ -1,7 +1,8 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { fetchCurrentExchanges } from "../../api/fetchCurrency";
 import forexActions from "./forexActions";
 
-const fetchLatestCurrencies = (state) => async (dispatch, getState) => {
+const fetchLatestCurrencies = () => async (dispatch, getState) => {
   dispatch(forexActions.fetchLatestCurrenciesStart());
 
   const {

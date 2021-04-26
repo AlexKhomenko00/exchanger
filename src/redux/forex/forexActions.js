@@ -12,6 +12,7 @@ const fetchLatestCurrenciesError = createAction(
 
 const setBaseCurrency = createAction("phonebook/setBaseCurrency");
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   fetchLatestCurrenciesStart,
   fetchLatestCurrenciesSuccess,

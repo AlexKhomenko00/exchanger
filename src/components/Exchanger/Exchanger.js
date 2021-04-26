@@ -1,41 +1,44 @@
-import React from "react";
-
-import CurrencySelector from "../CurrencySelector";
+import CurrencySelector from "../../containers/CurrencySelectorContainer";
+import s from "./Exchanger.module.css";
 
 const Exchanger = ({
-  onBaseCurrencyChange,
-  onCounterCurrencyChange,
-  baseCurrency,
-  counterCurrency,
-  onBaseCurrencyValueChange,
-  onCounterCurrencyValueChange,
-  baseCurrencyValue,
-  counterCurrencyValue,
-  fetchCounterCurrency,
+  baseCurrencyState,
+  cptyCurrencyState,
+  handleCurrencyValueChange,
+  handleCurrencyChange,
 }) => {
+  const disableFormSubmit = (e) => e.preventDefault();
   return (
-    <section className="exchanger">
-      <form>
+    <section className={s.exchanger}>
+      <h3 className={s.exchangerTitle}>Convert your currency</h3>
+      <form className={s.currencyForm} onSubmit={disableFormSubmit}>
         <input
+          name="base"
           type="number"
-          value={baseCurrencyValue}
-          onChange={(e) => {
-            onBaseCurrencyValueChange(e.target.value);
-            fetchCounterCurrency(e.target.value);
-          }}
+          className={s.currencyInput}
+          value={baseCurrencyState.value}
+          onChange={handleCurrencyValueChange}
+          autocomplete="off"
         />
         <CurrencySelector
-          handleCurrencyChange={onBaseCurrencyChange}
-          startCurrency={baseCurrency}
+          handleCurrencyChange={handleCurrencyChange}
+          startCurrencyProp={baseCurrencyState.currency}
+          name={"base"}
         />
+      </form>
+      <form className={s.currencyForm} onSubmit={disableFormSubmit}>
         <input
           type="number"
-          value={counterCurrencyValue}
-          onChange={(e) => onCounterCurrencyValueChange(e.target.value)}
+          name="cpty"
+          className={s.currencyInput}
+          value={cptyCurrencyState.value}
+          onChange={handleCurrencyValueChange}
+          autocomplete="off"
         />
         <CurrencySelector
-          handleCurrencyChange={onCounterCurrencyChange}
-          startCurrency={counterCurrency}
+          handleCurrencyChange={handleCurrencyChange}
+          startCurrencyProp={cptyCurrencyState.currency}
+          name={"cpty"}
         />
       </form>
     </section>

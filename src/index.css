@@ -1,0 +1,17 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #f7f8fb;
+}
+
+:root {
+  --select-border: #81b3d2;
+  --select-focus: #d73444;
+  --select-arrow: var(--select-border);
+  --select-text-color: var(--select-border);
+}

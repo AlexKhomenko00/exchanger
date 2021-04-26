@@ -1,19 +1,34 @@
 import axios from "axios";
 
-const fetchCurrentExchanges = (baseCurrency) =>
-  axios
-    .get(`https://api.exchangeratesapi.io/latest?base=${baseCurrency}`)
-    .then(({ data }) => {
-      if (baseCurrency === "EUR") {
-        data.rates.EUR = "1";
-      }
+const API_KEY = "c965a02f2325ec2646a90b7e";
 
-      return data.rates;
-    });
+const fetchCurrentExchanges = async (baseCurrency) => {
+  try {
+    const { data } = await axios.get(
+      ` https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${baseCurrency}`
+    );
 
-const fetchCurrenciesPair = (base, cpty) =>
-  axios
-    .get(`https://api.exchangeratesapi.io/latest?base=${base}&symbols=${cpty} `)
-    .then(({ data }) => data.rates[cpty]);
+    return data.conversion_rates;
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
+
+const fetchCurrenciesPair = async (base, cpty, amount) => {
+  try {
+    if (!base || !cpty || !amount || +amount <= 0) {
+      return 0;
+    }
+    const { data } = await axios.get(
+      `https://v6.exchangerate-api.com/v6/${API_KEY}/pair/${base}/${cpty}/${amount} `
+    );
+
+    return data.conversion_result;
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
 
 export { fetchCurrentExchanges, fetchCurrenciesPair };

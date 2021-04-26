@@ -1,0 +1,53 @@
+.exchangerHeader {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.exchangerNav {
+  display: flex;
+  justify-self: center;
+}
+
+.AppBarLink {
+  font-family: "Open Sans", sans-serif;
+  backface-visibility: hidden;
+  transition: 0.5s color ease;
+  text-decoration: none;
+  color: #81b3d2;
+  position: relative;
+  font-size: 2.5em;
+}
+.AppBarLink:first-child {
+  margin-right: 10%;
+}
+
+.AppBarLink:before,
+.AppBarLink:after {
+  content: "";
+  height: 5px;
+  height: 0.35rem;
+  width: 0;
+  background: #d73444;
+  transition: 0.5s all ease;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.AppBarLink:after {
+  bottom: -0.25em;
+}
+.AppBarLink:hover:before,
+.AppBarLink:hover:after {
+  width: 100%;
+}
+
+.AppBarLink:hover,
+.AppBarLink__active {
+  color: #d73444;
+}

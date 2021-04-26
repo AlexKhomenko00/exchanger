@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+body {
+  font-family: "Montserrat";
+  font-size: 20px;
+}
+
+table caption {
+  text-align: center;
+}
+
+.exchangeTable {
+  margin-top: 10px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 55%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.currencyName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.currencySymbol {
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid #81b3d2;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  padding: 15px 0 0 0;
+  margin-right: 10px;
+}
+
+table th,
+table td {
+  padding: 10px;
+  border: 1px solid #81b3d2;
+}
