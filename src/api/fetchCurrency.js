@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_KEY = "c965a02f2325ec2646a90b7e";
+const API_KEY = "a88457b0c2762578a02fbe22";
 
 const fetchCurrentExchanges = async (baseCurrency) => {
   try {
